@@ -52,6 +52,18 @@ const App = () => {
 
     fetchWeatherData();
   }, [selectedCity]);
+
+  useEffect(() => {
+    const defaultCity = {
+      name: "London",
+      country: "United Kingdom",
+      latitude: 51.5074,
+      longitude: -0.1278,
+    };
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelectedCity(defaultCity);
+  }, []);
   
   useEffect(() => {
     if(!data || !data.location) return; 
@@ -64,8 +76,8 @@ const App = () => {
       temperature: current_weather.temperature,
       feelsLike: current_weather.apparent_temperature || current_weather.temperature,
       humidity: hourly.relative_humidity_2m[0],
-      windSpeed: current_weather.wind_speed,
-      weatherCode: current_weather.weather_code,
+      windSpeed: current_weather.windspeed,
+      weatherCode: current_weather.weathercode,
       minTemp: daily.temperature_2m_min[0],
       maxTemp: daily.temperature_2m_max[0],
     };
@@ -73,6 +85,7 @@ const App = () => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setWeatherData(currentWeather);
 
+    //TODO check the data fields
     //daily forecast
     const forecast = daily.time.slice(1, 7).map((date, index) => ({
       day: new Date(date).toLocaleDateString(undefined, {weekday: "long"}),
