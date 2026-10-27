@@ -3,7 +3,7 @@ import { getWeatherIcon } from "../utils/weather";
 
 const HourlyForecast = ({ hourlyData }) => {
   return (
-    <div>
+    <div className="mb-8">
       <h2 className="text-2xl font-bold text-white mb-4">
         Today&apos;s Weather
       </h2>
